@@ -21,7 +21,6 @@
   }
   
   section.listing a {
-    background-color: var(--secondary-color);
     padding-left: 20px;
     text-decoration: none;
     color: var(--primary-color);
