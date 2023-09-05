@@ -1,1 +1,29 @@
+<!-- line 2  is an example of interpolation from the rooms.component class -->
 <h1>Welcome to {{hotelName}}</h1>
+
+<div class="roomsDiv" [hidden]="hideRooms">
+<!-- variables can be bound to any native tag element -->
+<!-- uses box syntax -->
+<!-- [innerText] and others...these are the similar properties that you are used to accessing via the DOM with JS
+you just need to use the squarebrackets around the JS DOM element property -->
+<h3>Number of Rooms:</h3>
+<div [innerText]="numberOfRooms"></div>
+</div>
+
+<!-- Optional Chaining -->
+<!-- the ? serves to check if availableRooms exists for the object at all -->
+<!-- {{ rooms?.availableRooms ?? 'No rooms'}} -->
+
+<!-- *ngIf is an example of an Angular Directive.  It behaves like an if statement in TS -->
+<div *ngIf="rooms.availableRooms > 0; else elseBlock">
+    Rooms List
+</div>
+
+<ng-template #elseBlock>
+    No Rooms
+</ng-template>
+<!-- event binding -->
+<!-- uses banana syntax -->
+<!-- toggle() is the function, it is written in the component class section -->
+<!-- in this case toggle() changes the value of "hidden" for the value of the roomDiv -->
+<button (click)="toggle()">Toggle</button>
