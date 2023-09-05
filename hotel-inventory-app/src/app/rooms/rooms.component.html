@@ -7,7 +7,11 @@
 <!-- [innerText] and others...these are the similar properties that you are used to accessing via the DOM with JS
 you just need to use the squarebrackets around the JS DOM element property -->
 <h3>Number of Rooms:</h3>
-<div [innerText]="numberOfRooms"></div>
+<!-- ngStyle is another directive -->
+<!-- it can be used to change an inline style on an element -->
+<!-- there is also ngClass which can be used to change the class of an element -->
+<!-- these 2 directives do not have an * because they do not add/remove elements from the DOM -->
+<div [ngStyle]="{'color': rooms.availableRooms ? 'steelblue' : 'red'}" [innerText]="numberOfRooms"></div>
 </div>
 
 <!-- Optional Chaining -->
@@ -15,8 +19,42 @@ you just need to use the squarebrackets around the JS DOM element property -->
 <!-- {{ rooms?.availableRooms ?? 'No rooms'}} -->
 
 <!-- *ngIf is an example of an Angular Directive.  It behaves like an if statement in TS -->
+<!-- the * lets you know that this is a structural type of directive -->
+<!-- something that modifies the DOM, they will add to or subtract an element from the DOM-->
 <div *ngIf="rooms.availableRooms > 0; else elseBlock">
     Rooms List
+    <br>
+    <table>
+        <tr>
+            <!-- <th>Even/Odd</th> -->
+            <th>Index</th>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Amenities</th>
+            <th>Price</th>
+            <th>Checkin Time</th>
+            <th>Rating</th>
+        </tr>
+<!-- *ngFor creates a for loop for displaying repetitive data -->
+<!-- works like a forEach loop -->
+        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomList; let e=even; let o=odd; let i = index">
+            <td style="display: none">{{ e ? "Even" : "Odd" }}</td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ room.roomNumber }}</td>
+            <td>{{ room.roomType }}</td>
+            <!-- pipes can also manipulate the case of a string -->
+            <td>{{ room.amenities | titlecase}}</td>
+            <!-- pipes can manipulate the currency -->
+            <!-- look at the docs for other uses for pipes -->
+            <td>{{ room.price | currency : 'USD'}}</td>
+            <!-- below is an example of a "pipe" in Angular -->
+            <!-- it is used to format objects like a Date object -->
+            <td>{{ room.checkinTime | date : 'dd/MMM/YYYY'}}</td>
+            <!-- below is the decimal pipe...it is identified with "number" -->
+            <!-- reference documentation for what numbers mean -->
+            <td>{{ room.rating | number: '1.0-0'}}</td>
+        </tr>
+    </table>
 </div>
 
 <ng-template #elseBlock>
