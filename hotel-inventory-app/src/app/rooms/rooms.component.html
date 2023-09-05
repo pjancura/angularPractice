@@ -2,18 +2,23 @@
 <h1>Welcome to {{hotelName}}</h1>
 
 <div class="roomsDiv" [hidden]="hideRooms">
-<!-- variables can be bound to any native tag element -->
-<!-- uses box syntax -->
-<!-- [innerText] and others...these are the similar properties that you are used to accessing via the DOM with JS
-you just need to use the squarebrackets around the JS DOM element property -->
-<h3>Number of Rooms:</h3>
-<!-- ngStyle is another directive -->
-<!-- it can be used to change an inline style on an element -->
-<!-- there is also ngClass which can be used to change the class of an element -->
-<!-- these 2 directives do not have an * because they do not add/remove elements from the DOM -->
-<div [ngStyle]="{'color': rooms.availableRooms ? 'steelblue' : 'red'}" [innerText]="numberOfRooms"></div>
-</div>
-
+    <!-- variables can be bound to any native tag element -->
+    <!-- uses box syntax -->
+    <!-- [innerText] and others...these are the similar properties that you are used to accessing via the DOM with JS
+        you just need to use the squarebrackets around the JS DOM element property -->
+        <h3>Number of Rooms:</h3>
+        <!-- ngStyle is another directive -->
+        <!-- it can be used to change an inline style on an element -->
+        <!-- there is also ngClass which can be used to change the class of an element -->
+        <!-- these 2 directives do not have an * because they do not add/remove elements from the DOM -->
+        <div [ngStyle]="{'color': rooms.availableRooms ? 'steelblue' : 'red'}" [innerText]="numberOfRooms"></div>
+    </div>
+    <!-- event binding -->
+    <!-- uses banana syntax -->
+    <!-- toggle() is the function, it is written in the component class section -->
+    <!-- in this case toggle() changes the value of "hidden" for the value of the roomDiv -->
+    <button (click)="toggle()">Toggle</button>
+    
 <!-- Optional Chaining -->
 <!-- the ? serves to check if availableRooms exists for the object at all -->
 <!-- {{ rooms?.availableRooms ?? 'No rooms'}} -->
@@ -24,7 +29,7 @@ you just need to use the squarebrackets around the JS DOM element property -->
 <div *ngIf="rooms.availableRooms > 0; else elseBlock">
     Rooms List
     <br>
-    <table>
+    <table class="table">
         <tr>
             <!-- <th>Even/Odd</th> -->
             <th>Index</th>
@@ -52,7 +57,7 @@ you just need to use the squarebrackets around the JS DOM element property -->
             <td>{{ room.checkinTime | date : 'dd/MMM/YYYY'}}</td>
             <!-- below is the decimal pipe...it is identified with "number" -->
             <!-- reference documentation for what numbers mean -->
-            <td>{{ room.rating | number: '1.0-0'}}</td>
+            <td>{{ room.rating | number: '1.1-1'}}</td>
         </tr>
     </table>
 </div>
@@ -60,8 +65,3 @@ you just need to use the squarebrackets around the JS DOM element property -->
 <ng-template #elseBlock>
     No Rooms
 </ng-template>
-<!-- event binding -->
-<!-- uses banana syntax -->
-<!-- toggle() is the function, it is written in the component class section -->
-<!-- in this case toggle() changes the value of "hidden" for the value of the roomDiv -->
-<button (click)="toggle()">Toggle</button>
