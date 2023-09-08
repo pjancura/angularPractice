@@ -1,5 +1,13 @@
 <!-- line 2  is an example of interpolation from the rooms.component class -->
-<h1>Welcome to {{hotelName}}</h1>
+<!-- <h1>Welcome to {{hotelName}}</h1> -->
+
+<hotelInv-header></hotelInv-header>
+<hotelInv-header></hotelInv-header>
+<hotelInv-header></hotelInv-header>
+<hotelInv-header></hotelInv-header>
+<hotelInv-header></hotelInv-header>
+<hotelInv-header></hotelInv-header>
+<hotelInv-header></hotelInv-header>
 
 <div class="roomsDiv" [hidden]="hideRooms">
     <!-- variables can be bound to any native tag element -->
@@ -18,7 +26,16 @@
     <!-- toggle() is the function, it is written in the component class section -->
     <!-- in this case toggle() changes the value of "hidden" for the value of the roomDiv -->
     <button (click)="toggle()">Toggle</button>
-    
+
+    <!-- this receives data from the child component - rooms-list.component - and displays the selected room in a json format -->
+    <div *ngIf="selectedRoom">
+        {{ selectedRoom | json }}
+    </div>
+
+    <div>
+        <button (click)="addRoom()">Add Room</button>
+    </div>
+
 <!-- Optional Chaining -->
 <!-- the ? serves to check if availableRooms exists for the object at all -->
 <!-- {{ rooms?.availableRooms ?? 'No rooms'}} -->
@@ -26,42 +43,16 @@
 <!-- *ngIf is an example of an Angular Directive.  It behaves like an if statement in TS -->
 <!-- the * lets you know that this is a structural type of directive -->
 <!-- something that modifies the DOM, they will add to or subtract an element from the DOM-->
-<div *ngIf="rooms.availableRooms > 0; else elseBlock">
-    Rooms List
-    <br>
-    <table class="table">
-        <tr>
-            <!-- <th>Even/Odd</th> -->
-            <th>Index</th>
-            <th>Room Number</th>
-            <th>Room Type</th>
-            <th>Amenities</th>
-            <th>Price</th>
-            <th>Checkin Time</th>
-            <th>Rating</th>
-        </tr>
-<!-- *ngFor creates a for loop for displaying repetitive data -->
-<!-- works like a forEach loop -->
-        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of roomList; let e=even; let o=odd; let i = index">
-            <td style="display: none">{{ e ? "Even" : "Odd" }}</td>
-            <td>{{ i + 1 }}</td>
-            <td>{{ room.roomNumber }}</td>
-            <td>{{ room.roomType }}</td>
-            <!-- pipes can also manipulate the case of a string -->
-            <td>{{ room.amenities | titlecase}}</td>
-            <!-- pipes can manipulate the currency -->
-            <!-- look at the docs for other uses for pipes -->
-            <td>{{ room.price | currency : 'USD'}}</td>
-            <!-- below is an example of a "pipe" in Angular -->
-            <!-- it is used to format objects like a Date object -->
-            <td>{{ room.checkinTime | date : 'dd/MMM/YYYY'}}</td>
-            <!-- below is the decimal pipe...it is identified with "number" -->
-            <!-- reference documentation for what numbers mean -->
-            <td>{{ room.rating | number: '1.1-1'}}</td>
-        </tr>
-    </table>
+<!-- <div *ngIf="rooms.availableRooms > 0; else elseBlock">
+    
+    <hotelInv-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></hotelInv-rooms-list>
 </div>
 
 <ng-template #elseBlock>
     No Rooms
-</ng-template>
+</ng-template> -->
+
+<!-- the following code is to demonstrate the use of ngOnDestroy -->
+<div *ngIf="hideRooms">
+    <hotelInv-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></hotelInv-rooms-list>
+</div>

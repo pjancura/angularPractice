@@ -1,6 +1,14 @@
 <h1>Hello World!</h1>
 <p>Angular is awesome.</p>
-<hotelInv-rooms></hotelInv-rooms> 
+<!-- <hotelInv-rooms></hotelInv-rooms>  -->
+
+<hotelInv-container>
+    <hotelInv-rooms></hotelInv-rooms>
+    <hotelInv-employee></hotelInv-employee>
+    <h1>From the ng-content</h1>
+</hotelInv-container>
+
+<div #name></div>
 
 <!-- below is an example of a switch/case logic element-->
 <!-- What is displayed is determined by the "role" value -->
@@ -14,4 +22,12 @@
     <div *ngSwitchDefault="">
         You are not authorized to view this page.
     </div>
+</div> -->
+
+<!-- ng-template is a tag which will never render anything itself -->
+<!-- it can help us render another component -->
+<!-- this will dynamically load the rooms component -->
+<!-- because of #user you can access this tag in the associated .ts file with @ViewChild() -->
+<!-- <div>
+    <ng-template #user></ng-template>
 </div> -->
