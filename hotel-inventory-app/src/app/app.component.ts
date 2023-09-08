@@ -2,10 +2,12 @@
 // app.component.ts is the "root" component
 
 
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, Optional, QueryList, ViewChild, ViewChildren, ViewContainerRef, OptionalDecorator, Inject } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
 import { HeaderComponent } from './header/header.component';
 import { RoomsListComponent } from './rooms/rooms-list/rooms-list.component';
+import { LoggerService } from './logger.service';
+import { localStorageToken } from './localstorage.token';
 
 @Component({
   // this is the html tag that goes into a parent / sibling to render this component 
@@ -24,13 +26,18 @@ export class AppComponent {
 
   role = 'Admin';
 
+  constructor (@Optional() private loggerService: LoggerService, @Inject(localStorageToken) private localStorage: Storage) {
+    
+  }
+
 
   // these allow me to dynamically change DOM components or property
   // ViewChild will only access the first instance of a component
-  // lines 29 - 40
   @ViewChild('name', {static: true}) name!: ElementRef;
   ngOnInit() {
     this.name.nativeElement.innerText = "Homely Hotel";
+    this.loggerService?.log('AppComponent.ngOnInit()');
+    this.localStorage.setItem('name', 'Homely Hotel');
   }
   
   
@@ -41,7 +48,6 @@ export class AppComponent {
     //   componentRef.instance.numberOfRooms = 50;
     // }
     
-  @ViewChildren(RoomsListComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
   // ngAfterViewInit(){
   //   console.log(this.headerChildrenComponent);

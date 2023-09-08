@@ -1,7 +1,8 @@
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, QueryList, SkipSelf, ViewChildren } from '@angular/core';
 import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { ViewChild } from '@angular/core';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'hotelInv-rooms',
@@ -36,44 +37,47 @@ export class RoomsComponent {
   // @ViewChild(HeaderComponent, { static: true }) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
 
+
+  // private means that the service will not leak onto my template (the html)
   // the constructor should not have any blocking code (i assume this means code that would stop the component from rendering entirely)
-  constructor () {}
+  constructor (@SkipSelf() private roomsService: RoomsService) {}
 
   // life cycle hooks
   // ngOnInit() gets called after my component is initialized
   ngOnInit(): void {
     // console.log(this.headerComponent);
-    this.roomList = [{
-      roomNumber: 1,
-      roomType: 'Deluxe Room',
-      amenities: 'air conditioner, Free Wi-fi, TV Bathroom',
-      price: 500,
-      photos: 'https://plus.unsplash.com/premium_photo-1678297270891-fda2e16796ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-      checkinTime: new Date('11-Nov-2023'),
-      checkoutTime: new Date('12-Nov-2023'),
-      rating: 4.5,
-    },
-    {
-      roomNumber: 2,
-      roomType: 'Deluxe Room',
-      amenities: 'air conditioner, Free Wi-fi, TV Bathroom, Kitchen',
-      price: 550,
-      photos: 'https://plus.unsplash.com/premium_photo-1678297270891-fda2e16796ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-      checkinTime: new Date('14-Nov-2023'),
-      checkoutTime: new Date('15-Nov-2023'), 
-      rating: 3.4,
-    },
-    {
-      roomNumber: 3,
-      roomType: 'Modest Room',
-      amenities: 'air conditioner, Free Wi-fi, TV Bathroom, Kitchen, In Room SodaStream',
-      price: 525,
-      photos: 'https://plus.unsplash.com/premium_photo-1678297270891-fda2e16796ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
-      checkinTime: new Date('14-Nov-2023'),
-      checkoutTime: new Date('15-Nov-2023'),
-      rating: 4.9, 
-    }
-  ]
+  //   this.roomList = [{
+  //     roomNumber: 1,
+  //     roomType: 'Deluxe Room',
+  //     amenities: 'air conditioner, Free Wi-fi, TV Bathroom',
+  //     price: 500,
+  //     photos: 'https://plus.unsplash.com/premium_photo-1678297270891-fda2e16796ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+  //     checkinTime: new Date('11-Nov-2023'),
+  //     checkoutTime: new Date('12-Nov-2023'),
+  //     rating: 4.5,
+  //   },
+  //   {
+  //     roomNumber: 2,
+  //     roomType: 'Deluxe Room',
+  //     amenities: 'air conditioner, Free Wi-fi, TV Bathroom, Kitchen',
+  //     price: 550,
+  //     photos: 'https://plus.unsplash.com/premium_photo-1678297270891-fda2e16796ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+  //     checkinTime: new Date('14-Nov-2023'),
+  //     checkoutTime: new Date('15-Nov-2023'), 
+  //     rating: 3.4,
+  //   },
+  //   {
+  //     roomNumber: 3,
+  //     roomType: 'Modest Room',
+  //     amenities: 'air conditioner, Free Wi-fi, TV Bathroom, Kitchen, In Room SodaStream',
+  //     price: 525,
+  //     photos: 'https://plus.unsplash.com/premium_photo-1678297270891-fda2e16796ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+  //     checkinTime: new Date('14-Nov-2023'),
+  //     checkoutTime: new Date('15-Nov-2023'),
+  //     rating: 4.9, 
+  //   }
+  // ]
+    this.roomList = this.roomsService.getRooms();
   }
 
   // this is listening for any changes / events that occur inside your application
@@ -132,6 +136,6 @@ export class RoomsComponent {
 
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
-
+   
 
 }
