@@ -3,6 +3,8 @@ import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { ViewChild } from '@angular/core';
 import { RoomsService } from './services/rooms.service';
+import { Observable } from 'rxjs';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'hotelInv-rooms',
@@ -17,7 +19,7 @@ export class RoomsComponent {
   hotelName = 'Homely Hotel';
   numberOfRooms = 10;
 
-  hideRooms = false;
+  hideRooms = true;
 
   selectedRoom!: RoomList;
 
@@ -31,13 +33,25 @@ export class RoomsComponent {
 
   roomList : RoomList[] = []
 
+  // the Observable can be given a <Type>
+  stream = new Observable(observer =>{
+    // .next sends the next piece of data
+    observer.next('streamUser1');
+    observer.next('streamUser2');
+    observer.next('streamUser3');
+    // .complete() ends the stream
+    observer.complete();
+    // observer.error('error');
+  })
+
   // this allows you to view anything about the component
   // static: true means that the component is safe to access from the parent life cycle hook
   // static: false (default value), this will make it not cause errors when your code is asynchronousjj
   // @ViewChild(HeaderComponent, { static: true }) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
-
-
+  
+  totalBytes = 0;
+  
   // private means that the service will not leak onto my template (the html)
   // the constructor should not have any blocking code (i assume this means code that would stop the component from rendering entirely)
   constructor (@SkipSelf() private roomsService: RoomsService) {}
@@ -77,7 +91,48 @@ export class RoomsComponent {
   //     rating: 4.9, 
   //   }
   // ]
-    this.roomList = this.roomsService.getRooms();
+    // this next line was from before the faux API implementation
+    // this.roomList = this.roomsService.getRooms();
+
+    //  
+    this.roomsService.getRooms().subscribe(rooms => {
+      this.roomList = rooms;
+      console.log(this.roomList);
+    });
+    this.stream.subscribe({
+      next: (value) => console.log(value),
+      complete: () => console.log('complete'),
+      error: (err) => console.log(err)
+    });
+    this.stream.subscribe((data) => {
+      console.log(data);
+    });
+
+
+    this.roomsService.getPhotos().subscribe((event) => {
+      switch (event.type) {
+        case HttpEventType.Sent: {
+          console.log('Request has been made!');
+          break;
+        }
+        case HttpEventType.ResponseHeader: {
+          console.log('Request success!');
+          break;
+        }
+        case HttpEventType.DownloadProgress: {
+          console.log(`Bytes loaded ${this.totalBytes += event.loaded}`);
+          break
+        }
+        case HttpEventType.Response: {
+          console.log(event.body);
+          break;
+        }
+        default: {
+          console.log('Default Case was triggered');
+          break;
+        }
+      }
+    })
   }
 
   // this is listening for any changes / events that occur inside your application
@@ -117,7 +172,8 @@ export class RoomsComponent {
 
   addRoom() {
     const room: RoomList = {
-        roomNumber: 4,
+        // the following line is commented out because it is not needed now that the hotelapi-main folder is being used, the api creates the roomNumber for you
+        // roomNumber: "4",
         roomType: 'Deluxe Room',
         amenities: 'air conditioner, Free Wi-fi, TV Bathroom',
         price: 500,
@@ -131,7 +187,34 @@ export class RoomsComponent {
     // and then pushes the new room onto the end
     // we do it this way because we are returning a new array each time we add a room
     // this has to do with immutability of arrays
-    this.roomList = [...this.roomList, room];
+    // this.roomList = [...this.roomList, room];
+
+    // this uses hotelapi-main to add a room
+    this.roomsService.addRoom(room).subscribe((data) => {
+      this.roomList = data;
+    })
+  }
+
+  editRoom(){
+    const room: RoomList = {
+     roomNumber: "3",
+     roomType: 'Deluxe Room',
+     amenities: 'air conditioner, Free Wi-fi, TV Bathroom',
+     price: 500,
+     photos: 'https://plus.unsplash.com/premium_photo-1678297270891-fda2e16796ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80',
+     checkinTime: new Date('11-Nov-2023'),
+     checkoutTime: new Date('12-Nov-2023'),
+     rating: 2.5,
+    };
+    this.roomsService.editRoom(room).subscribe((data) =>{
+      this.roomList = data;
+    });
+  }
+
+  deleteRoom() {
+    this.roomsService.deleteRoom('3').subscribe((data) => {
+      this.roomList = data;
+    });
   }
 
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;

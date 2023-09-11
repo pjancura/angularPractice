@@ -6,7 +6,10 @@ export interface Room {
 }
 
 export interface RoomList {
-    roomNumber : number;
+    roomNumber?: string;
+    // roomNumber was originally a number, but when we switched to using the faux API
+    // the API had this property as a string
+    // roomNumber : number;
     roomType : string;
     amenities : string;
     price : number;

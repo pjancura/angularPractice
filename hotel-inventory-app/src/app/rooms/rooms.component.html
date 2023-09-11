@@ -9,6 +9,8 @@
 <hotelInv-header></hotelInv-header>
 <hotelInv-header></hotelInv-header>
 
+<h3>{{totalBytes}}bytes loaded</h3>
+
 <div class="roomsDiv" [hidden]="hideRooms">
     <!-- variables can be bound to any native tag element -->
     <!-- uses box syntax -->
@@ -56,3 +58,6 @@
 <div *ngIf="hideRooms">
     <hotelInv-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></hotelInv-rooms-list>
 </div>
+
+<button (click)="editRoom()">Edit Room</button>
+<button (click)="deleteRoom()">Delete Room</button>
