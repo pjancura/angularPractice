@@ -3,13 +3,19 @@
 
 <hotelInv-header></hotelInv-header>
 <hotelInv-header></hotelInv-header>
+<!-- <hotelInv-header></hotelInv-header>
 <hotelInv-header></hotelInv-header>
 <hotelInv-header></hotelInv-header>
 <hotelInv-header></hotelInv-header>
-<hotelInv-header></hotelInv-header>
-<hotelInv-header></hotelInv-header>
+<hotelInv-header></hotelInv-header> -->
 
 <h3>{{totalBytes}}bytes loaded</h3>
+<h3>{{ getError$ | async }}</h3>
+<h3>Number of rooms: {{ roomsCount$ | async }}</h3>
+
+<!-- the async | json unwrap the data for us so that we do not have to subscribe to the data -->
+<!-- this way we do not have to unsubscribe from the data -->
+<!-- <h6>{{rooms$ | async | json }}</h6> -->
 
 <div class="roomsDiv" [hidden]="hideRooms">
     <!-- variables can be bound to any native tag element -->
@@ -56,8 +62,17 @@
 
 <!-- the following code is to demonstrate the use of ngOnDestroy -->
 <div *ngIf="hideRooms">
-    <hotelInv-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></hotelInv-rooms-list>
+    <div *ngIf="rooms$ | async as rooms; else elseBlock">
+    <hotelInv-rooms-list [rooms]="rooms" [title]="title" (selectedRoom)="selectRoom($event)"></hotelInv-rooms-list>
 </div>
 
+<ng-template #elseBlock>
+    No Rooms
+</ng-template>
+</div>
+
+
+<!-- used for CRUD operations -->
 <button (click)="editRoom()">Edit Room</button>
 <button (click)="deleteRoom()">Delete Room</button>
+

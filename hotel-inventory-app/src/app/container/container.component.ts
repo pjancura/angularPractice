@@ -7,7 +7,7 @@ import { RoomsService } from '../rooms/services/rooms.service';
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss'],
   // this adds a separate instance of the RoomsService
-  providers: [RoomsService]
+  //providers: [RoomsService]
 })
 export class ContainerComponent {
 
@@ -15,7 +15,9 @@ export class ContainerComponent {
 
   // @Host() can be used inside a parent component
   // children will not look above the parent component for this service 
-  constructor(@Host() private roomsService: RoomsService){
+  constructor(
+    //@Host() private roomsService: RoomsService
+    ){
 
   }
 

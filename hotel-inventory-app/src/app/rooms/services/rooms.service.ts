@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.development';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 
 
 @Injectable({
@@ -46,12 +47,24 @@ export class RoomsService {
   // }
 ]
 
+// the $ in getRooms$ tells us that it is a stream variable
+// once you subscribe to data the data can't be modified
+// data can only be modified inside a function
+// the function that is used for this is .pipe()
+getRooms$ = this.http.get<RoomList[]>('/api/rooms').pipe(
+  // shareReplay will replay the data (x) times
+  shareReplay(1)
+);
+
+
+
 // the APP_SERVICE_CONFIG has to be injected into the constructor, because it is a value provider type of service
 constructor(@Inject(APP_SERVICE_CONFIG)  private config: AppConfig, private http: HttpClient) {
   console.log('Rooms Service is initialized');
   console.log(this.config.apiEndpoint)
 }
 
+// the below method has been replaced with getRooms$
   getRooms(){
     // the next line was from before the integration of the faux API
     // return this.roomList;
@@ -59,7 +72,7 @@ constructor(@Inject(APP_SERVICE_CONFIG)  private config: AppConfig, private http
     // <RoomList[]> is a type of "generic"
     // it tells the method to return the data in that particular type of data
     // console.log(this.http.get<RoomList[]>('/api/rooms'));
-    return this.http.get<RoomList[]>('/api/rooms')
+    return this.http.get<RoomList[]>('/api/rooms');
   }
 
   addRoom(room: RoomList) {

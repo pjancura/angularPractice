@@ -12,7 +12,8 @@ import { RoomList } from '../rooms';
 })
 export class RoomsListComponent {
   // the below line gets the data from the onInit function in the parent component
-  @Input() rooms: RoomList[] = [];
+  // rooms needs to be of type RoomList[] | null so that the async pipe will work and not throw an error
+  @Input() rooms: RoomList[] | null = [];
   
   @Input() title: string = '';
 

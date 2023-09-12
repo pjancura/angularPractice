@@ -3,8 +3,10 @@ import { Room, RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { ViewChild } from '@angular/core';
 import { RoomsService } from './services/rooms.service';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import { JsonPipe } from '@angular/common';
+
 
 @Component({
   selector: 'hotelInv-rooms',
@@ -31,7 +33,7 @@ export class RoomsComponent {
 
   title = 'Room List';
 
-  roomList : RoomList[] = []
+  roomList : RoomList[] = [];
 
   // the Observable can be given a <Type>
   stream = new Observable(observer =>{
@@ -44,6 +46,14 @@ export class RoomsComponent {
     // observer.error('error');
   })
 
+  // Subject is the base class of all streams in RxJS
+  error$ = new Subject<string>();
+  getError$ = this.error$.asObservable();
+
+  roomsCount$ = this.roomsService.getRooms$.pipe(
+    map((rooms) => rooms.length)
+  )
+
   // this allows you to view anything about the component
   // static: true means that the component is safe to access from the parent life cycle hook
   // static: false (default value), this will make it not cause errors when your code is asynchronousjj
@@ -51,6 +61,16 @@ export class RoomsComponent {
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
   
   totalBytes = 0;
+
+  subscription!: Subscription;
+
+  // this does not have a subscription involved for the data
+  rooms$ = this.roomsService.getRooms$.pipe(
+    catchError((err) => {
+      // console.log(err);
+      this.error$.next(err.message);
+      return of([]);
+    }));
   
   // private means that the service will not leak onto my template (the html)
   // the constructor should not have any blocking code (i assume this means code that would stop the component from rendering entirely)
@@ -94,17 +114,24 @@ export class RoomsComponent {
     // this next line was from before the faux API implementation
     // this.roomList = this.roomsService.getRooms();
 
-    //  
-    this.roomsService.getRooms().subscribe(rooms => {
+    //  this pulls the room data
+    // getRooms$ has a property that caches the data
+    // so that there isn't a second call to get the data from the application
+    this.roomsService.getRooms$.subscribe(rooms => {
       this.roomList = rooms;
       console.log(this.roomList);
     });
+
+    // below are 2 methods for accessing the data of a stream
     this.stream.subscribe({
       next: (value) => console.log(value),
       complete: () => console.log('complete'),
       error: (err) => console.log(err)
     });
     this.stream.subscribe((data) => {
+      // this.subscription = this.roomsService.getRooms$.subscribe((rooms) => {
+      //   this.roomList = rooms;
+      // })
       console.log(data);
     });
 
@@ -219,6 +246,12 @@ export class RoomsComponent {
 
   @ViewChildren(HeaderComponent) headerChildrenComponent!: QueryList<HeaderComponent>;
 
+  ngOnDestroy() {
+    // the following lines of code will destroy a subscription if the component was destroyed
+    if (this.subscription){
+      this.subscription.unsubscribe();
+    }
+  }
    
 
 }
