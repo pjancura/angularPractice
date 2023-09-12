@@ -3,7 +3,7 @@ import { RoomList } from '../rooms';
 import { environment } from 'src/environments/environment.development';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.service';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { shareReplay } from 'rxjs';
 
 
@@ -47,11 +47,17 @@ export class RoomsService {
   // }
 ]
 
+// below is a token that can be passed to the Http Request
+// this token can be used to verify authenticity of a user to unlock data
+headers = new HttpHeaders({'token': '1234567890asdfjk'});
+
 // the $ in getRooms$ tells us that it is a stream variable
 // once you subscribe to data the data can't be modified
 // data can only be modified inside a function
 // the function that is used for this is .pipe()
-getRooms$ = this.http.get<RoomList[]>('/api/rooms').pipe(
+getRooms$ = this.http.get<RoomList[]>('/api/rooms', 
+// {headers: this.headers}
+).pipe(
   // shareReplay will replay the data (x) times
   shareReplay(1)
 );
@@ -72,11 +78,18 @@ constructor(@Inject(APP_SERVICE_CONFIG)  private config: AppConfig, private http
     // <RoomList[]> is a type of "generic"
     // it tells the method to return the data in that particular type of data
     // console.log(this.http.get<RoomList[]>('/api/rooms'));
-    return this.http.get<RoomList[]>('/api/rooms');
+    // return this.http.get<RoomList[]>('/api/rooms');
+
+    const headers = new HttpHeaders({'token': '1234567890asdfjk'});
+    return this.http.get<RoomList[]>('/api/rooms', 
+    // {headers: headers,}
+    );
   }
 
   addRoom(room: RoomList) {
-    return this.http.post<RoomList[]>('/api/rooms', room);
+    return this.http.post<RoomList[]>('/api/rooms', room
+    //, {headers: this.headers}
+    );
   }
 
   editRoom(room: RoomList) {

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // line 4 is the import for HttpClientModule this allows you to communicate with your API's 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,14 @@ import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
+import { RequestInterceptor } from './request.interceptor';
+import { InitService } from './init.service';
+
+// you can call multiple service in this function
+// this function will be called before your app is initialized
+function initFactory(initService: InitService) {
+  return () => initService.init();
+}
 
 // any module you have created goes here
 // @NgModule is a decorator
@@ -36,6 +44,15 @@ import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
   providers: [{
     provide: APP_SERVICE_CONFIG,
     useValue: APP_CONFIG,
+  },{
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestInterceptor,
+    multi: true,
+  },{
+    provide: APP_INITIALIZER,
+    useFactory: initFactory,
+    deps: [InitService],
+    multi: true,
   }],
   // 
   bootstrap: [AppComponent]
