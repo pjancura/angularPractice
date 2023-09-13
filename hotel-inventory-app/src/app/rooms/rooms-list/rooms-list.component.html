@@ -30,6 +30,11 @@
             <!-- below is the decimal pipe...it is identified with "number" -->
             <!-- reference documentation for what numbers mean -->
             <td>{{ room.rating | number: '1.1-1'}}</td>
-            <td><button class="btn btn-outline-primary" (click)="selectRoom(room)">Select</button></td>
+            <td>
+                <!-- <button class="btn btn-outline-primary" (click)="selectRoom(room)">Select</button> -->
+
+                <!-- [routerLink] appends whatever is in the []. unless you use '/', then it means start with whatever follows the "/" -->
+                <button class="btn btn-outline-primary" [routerLink]="['/rooms', room.roomNumber]">Book Room</button>
+            </td>
         </tr>
     </table>

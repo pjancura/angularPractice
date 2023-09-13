@@ -14,6 +14,14 @@ import { EmployeeComponent } from './employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
 import { RequestInterceptor } from './request.interceptor';
 import { InitService } from './init.service';
+import { AppNavComponent } from './app-nav/app-nav.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
 
 // you can call multiple service in this function
 // this function will be called before your app is initialized
@@ -33,6 +41,9 @@ function initFactory(initService: InitService) {
     HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
+    AppNavComponent,
+    NotfoundComponent,
+    RoomsBookingComponent,
   ],
   // any Angular module must be imported into "imports"
   imports: [
@@ -40,6 +51,11 @@ function initFactory(initService: InitService) {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [{
     provide: APP_SERVICE_CONFIG,
