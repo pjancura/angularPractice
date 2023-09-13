@@ -8,12 +8,13 @@
 <!-- valid and invalid are opposites of each other -->
 <p><b>roomsForm.valid:</b> {{ roomsForm.valid | json }}</p>
 <p><b>roomsForm.invalid:</b> {{ roomsForm.invalid | json }}</p>
-<!--  -->
+<!-- pristine means that no one has touched your form -->
+<!-- dirty means that inputs initial state has changed -->
 <p><b>roomsForm.pristine:</b> {{ roomsForm.pristine | json }}</p>
 <p><b>roomsForm.dirty:</b> {{ roomsForm.dirty | json }}</p>
 <p><b>roomsForm.value:</b> <br>{{ roomsForm.value | json }}</p>
 
-<form #roomsForm="ngForm" (ngSubmit)="AddRoom()">
+<form #roomsForm="ngForm" (ngSubmit)="AddRoom(roomsForm)">
   <div class="form-group">
       <label for="roomType">Room Type:
     </label>
