@@ -22,6 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
+import { RoomsAddComponent } from './rooms/rooms-add/rooms-add.component';
+import { FormsModule } from '@angular/forms';
 
 // you can call multiple service in this function
 // this function will be called before your app is initialized
@@ -44,6 +46,7 @@ function initFactory(initService: InitService) {
     AppNavComponent,
     NotfoundComponent,
     RoomsBookingComponent,
+    RoomsAddComponent,
   ],
   // any Angular module must be imported into "imports"
   imports: [
@@ -56,6 +59,7 @@ function initFactory(initService: InitService) {
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    FormsModule,
   ],
   providers: [{
     provide: APP_SERVICE_CONFIG,

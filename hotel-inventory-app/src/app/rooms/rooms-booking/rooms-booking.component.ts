@@ -13,7 +13,7 @@ export class RoomsBookingComponent {
   // id$ !: Observable<number>;
 
   // this 'id' is referencing the path to rooms-booking
-  // ex: /rooms/8      id = 8 in this case
+  // ex: rooms/8      id = 8 in this case
   id$ = this.router.paramMap.pipe(map((params) => params.get('id')))
 
   constructor (private router: ActivatedRoute) {}
