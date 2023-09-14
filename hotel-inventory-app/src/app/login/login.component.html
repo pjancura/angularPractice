@@ -1,6 +1,11 @@
 <form action="">
     <div class="form-group">
-        <input hotelInvHover="lightgreen" class="form-control" type="email" name="name" id="email" [(ngModel)]="email" placeholder="Provide your user Email">
+        <!-- #emailControl is a type of template variable reference -->
+        <!-- you can then use the variable to access the properties of ngModel as a local template reference -->
+        <input #emailControl="ngModel" hotelInvEmailValidator hotelInvHover="lightgreen" class="form-control" type="email" name="name" id="email" [(ngModel)]="email" placeholder="Provide your user Email">
+    </div>
+    <div>
+        {{emailControl.errors | json}}
     </div>
     <div class="form-group">
         <!-- with input being added, the value of "hotelInvHover" can be changed

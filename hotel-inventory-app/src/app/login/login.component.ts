@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'hotelInv-login',
@@ -9,13 +10,17 @@ export class LoginComponent {
   email: string='';
   password: string='';
 
-  constructor () {}
+  constructor (private route: Router) {}
 
   ngOnInit (): void {}
 
   login() {
     if(this.email ==="admin@gmail.com" && this.password==="admin"){
-      alert("Login Successful");
+      // navigate() tells the router which path to use
+      // it creates the URL for us
+      // this.route.navigate(['/rooms', 'add'])
+      // navigateByUrl() we supply the URL to use
+      this.route.navigateByUrl('/rooms/add');
     }
   }
 

@@ -4,16 +4,19 @@
 <hotelInv-header></hotelInv-header>
 <hotelInv-header></hotelInv-header>
 <!-- <hotelInv-header></hotelInv-header>
-<hotelInv-header></hotelInv-header>
-<hotelInv-header></hotelInv-header>
-<hotelInv-header></hotelInv-header>
-<hotelInv-header></hotelInv-header> -->
+    <hotelInv-header></hotelInv-header>
+    <hotelInv-header></hotelInv-header>
+    <hotelInv-header></hotelInv-header>
+    <hotelInv-header></hotelInv-header> -->
+    
+    <h3>{{totalBytes}}bytes loaded</h3>
+    <h3>{{ getError$ | async }}</h3>
+    <h3>Number of rooms: {{ roomsCount$ | async }}</h3>
+    
 
-<h3>{{totalBytes}}bytes loaded</h3>
-<h3>{{ getError$ | async }}</h3>
-<h3>Number of rooms: {{ roomsCount$ | async }}</h3>
 
-<!-- the async | json unwrap the data for us so that we do not have to subscribe to the data -->
+
+    <!-- the async | json unwrap the data for us so that we do not have to subscribe to the data -->
 <!-- this way we do not have to unsubscribe from the data -->
 <!-- <h6>{{rooms$ | async | json }}</h6> -->
 
@@ -40,8 +43,15 @@
         {{ selectedRoom | json }}
     </div>
 
+    <!-- this router-outlet is for the child path for RoomsBookingComponent -->
+    <router-outlet></router-outlet>
+
+
     <div>
-        <button (click)="addRoom()">Add Room</button>
+        <!-- <button (click)="addRoom()">Add Room</button> -->
+
+        <!-- this button will display the add room form -->
+        <button routerLink="add">Add Room</button>
     </div>
 
 <!-- Optional Chaining -->
@@ -75,4 +85,5 @@
 <!-- used for CRUD operations -->
 <button (click)="editRoom()">Edit Room</button>
 <button (click)="deleteRoom()">Delete Room</button>
+
 

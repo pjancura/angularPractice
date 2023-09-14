@@ -5,10 +5,10 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RoomsComponent } from './rooms/rooms.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RoomsListComponent } from './rooms/rooms-list/rooms-list.component';
-import { HeaderComponent } from './header/header.component';
+// reason is found in declarations
+// import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
@@ -21,11 +21,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
-import { RoomsAddComponent } from './rooms/rooms-add/rooms-add.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
+import { EmailValidatorDirective } from './email-validator/email-validator.directive';
+import { RoomsModule } from './rooms/rooms.module';
+
 
 // you can call multiple service in this function
 // this function will be called before your app is initialized
@@ -40,21 +41,23 @@ function initFactory(initService: InitService) {
   // component, directive, pipes must be written in "declarations"
   declarations: [
     AppComponent,
-    RoomsComponent,
-    RoomsListComponent,
-    HeaderComponent,
+    // HeaderComponent is removed because it can only be declared in one module
+    // HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
     AppNavComponent,
     NotfoundComponent,
-    RoomsBookingComponent,
-    RoomsAddComponent,
     LoginComponent,
     HoverDirective,
+    EmailValidatorDirective,
   ],
   // any Angular module must be imported into "imports"
   imports: [
     BrowserModule,
+    // this registers the RoomsModule into the parent app.module
+    // remember routes are accessed top to bottom so any "featureModule" like RoomsModule that has its own routing
+    // needs to be imported before the AppRoutingModule
+    RoomsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
