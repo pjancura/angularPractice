@@ -9,6 +9,7 @@ import { RoomsListComponent } from './rooms/rooms-list/rooms-list.component';
 import { LoggerService } from './logger.service';
 import { localStorageToken } from './localstorage.token';
 import { InitService } from './init.service';
+import { ConfigService } from './services/config.service';
 
 @Component({
   // this is the html tag that goes into a parent / sibling to render this component 
@@ -27,7 +28,10 @@ export class AppComponent {
 
   role = 'Admin';
 
-  constructor (@Optional() private loggerService: LoggerService, @Inject(localStorageToken) private localStorage: Storage, private initService: InitService) {
+  constructor (@Optional() private loggerService: LoggerService, 
+  @Inject(localStorageToken) private localStorage: Storage, 
+  private initService: InitService, 
+  private configService: ConfigService) {
     console.log(initService.config);
   }
 

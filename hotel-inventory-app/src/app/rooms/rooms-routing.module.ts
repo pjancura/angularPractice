@@ -8,7 +8,7 @@ const routes: Routes = [
   // the children property will allow whatever paths that are specified
   // to be loaded into the same view as the parent
   // as opposed to loading a separate view for the path
-  { path: 'rooms', component: RoomsComponent, children:  [
+  { path: '', component: RoomsComponent, children:  [
     { path: 'add', component: RoomsAddComponent },
     { path: ':id', component: RoomsBookingComponent },
   ]},

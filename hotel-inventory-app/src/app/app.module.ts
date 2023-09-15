@@ -25,7 +25,8 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailValidatorDirective } from './email-validator/email-validator.directive';
-import { RoomsModule } from './rooms/rooms.module';
+import { RouteConfigToken } from './services/routeConfig.service';
+
 
 
 // you can call multiple service in this function
@@ -57,7 +58,8 @@ function initFactory(initService: InitService) {
     // this registers the RoomsModule into the parent app.module
     // remember routes are accessed top to bottom so any "featureModule" like RoomsModule that has its own routing
     // needs to be imported before the AppRoutingModule
-    RoomsModule,
+    // RoomsModule was removed to teach me about lazy loading modules
+    // RoomsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -80,6 +82,9 @@ function initFactory(initService: InitService) {
     useFactory: initFactory,
     deps: [InitService],
     multi: true,
+  },{
+    provide: RouteConfigToken,
+    useValue: { title: 'Home'},
   }],
   // 
   bootstrap: [AppComponent]

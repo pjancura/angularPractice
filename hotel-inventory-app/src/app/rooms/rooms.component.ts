@@ -6,6 +6,7 @@ import { RoomsService } from './services/rooms.service';
 import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
+import { ConfigService } from '../services/config.service';
 
 
 @Component({
@@ -74,7 +75,7 @@ export class RoomsComponent {
   
   // private means that the service will not leak onto my template (the html)
   // the constructor should not have any blocking code (i assume this means code that would stop the component from rendering entirely)
-  constructor (@SkipSelf() private roomsService: RoomsService) {}
+  constructor (@SkipSelf() private roomsService: RoomsService, private configService: ConfigService) {}
 
   // life cycle hooks
   // ngOnInit() gets called after my component is initialized

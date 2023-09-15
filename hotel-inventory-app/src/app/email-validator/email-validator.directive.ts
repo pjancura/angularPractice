@@ -21,14 +21,18 @@ export class EmailValidatorDirective implements Validator {
   // ValidationErrors is a type of Key:Val pair
   validate(control: AbstractControl<any, any>): ValidationErrors | null {
     const value = control.value as string;
+    if (value === null) {
+      return null;
+    }
     // this is just looking for the string 'test' to be present in the input element
     // it is not communicating with the login component to look for admin@gmail.com
-    if(value.includes('test')){
+    else if (value.includes('test')){
       return {
         invalidEmail: true,
       }
+    } else {
+      return null;
     }
-    return null;
   }
 
 }
