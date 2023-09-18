@@ -10,6 +10,8 @@ import { LoggerService } from './logger.service';
 import { localStorageToken } from './localstorage.token';
 import { InitService } from './init.service';
 import { ConfigService } from './services/config.service';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   // this is the html tag that goes into a parent / sibling to render this component 
@@ -31,7 +33,8 @@ export class AppComponent {
   constructor (@Optional() private loggerService: LoggerService, 
   @Inject(localStorageToken) private localStorage: Storage, 
   private initService: InitService, 
-  private configService: ConfigService) {
+  private configService: ConfigService,
+  private router: Router,) {
     console.log(initService.config);
   }
 
@@ -40,6 +43,20 @@ export class AppComponent {
   // ViewChild will only access the first instance of a component
   @ViewChild('name', {static: true}) name!: ElementRef;
   ngOnInit() {
+    // this.router.events is an <observable> so it needs to be subscribed to
+    // this.router.events.subscribe((event) => {
+    //   console.log(`this.router.events:`, event);
+    // })
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationStart)
+    ).subscribe((event) => {
+      console.log('Navigation Started');
+    })
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      console.log('Navigation Completed');
+    })
     this.name.nativeElement.innerText = "Homely Hotel";
     this.loggerService?.log('AppComponent.ngOnInit()');
     this.localStorage.setItem('name', 'Homely Hotel');
