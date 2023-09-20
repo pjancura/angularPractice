@@ -1,1 +1,340 @@
-<p>booking works!</p>
+<h2>Booking Form</h2>
+
+<div>
+  <p>{{ bookingForm.value | json }}</p>
+  <p>bookingForm.pristine: {{ bookingForm.pristine | json }}</p>
+  <p>bookingForm.dirty: {{ bookingForm.dirty | json }}</p>
+</div>
+
+<button mat-raised-button color="primary" type="button" (click)="addPassport()">
+  Add Passport
+</button>
+<button
+  mat-raised-button
+  color="primary"
+  type="button"
+  (click)="deletePassport()"
+>
+  Delete Passport
+</button>
+
+<form class="example-form" [formGroup]="bookingForm" (ngSubmit)="addBooking()">
+  <!-- PASSPORT -->
+  <!-- this demonstrates adding a form control dynamically -->
+  <!-- this the button above uses addPassPort() to create the passport property in for the form -->
+  <mat-form-field
+    *ngIf="bookingForm.get('passport')"
+    class="example-full-width container-fluid"
+  >
+    <mat-label> Passport </mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="passport"
+      placeholder="Passport Number"
+    />
+  </mat-form-field>
+  <!-- BOOKING DATE -->
+  <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Booking Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="bookingDate"
+      [formControlName]="'bookingDate'"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="bookingDate"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #bookingDate></mat-datepicker>
+  </mat-form-field>
+  <!-- ROOM ID -->
+  <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Room Id</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControlName]="'roomId'"
+      placeholder="Enter Room Id Number"
+    />
+
+    <!-- <mat-error
+      *ngIf="
+        emailFormControl.hasError('email') &&
+        !emailFormControl.hasError('required')
+      "
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error> -->
+  </mat-form-field>
+  <!-- CHECKIN DATE -->
+  <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Checkin Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="checkin"
+      [formControlName]="'checkinDate'"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="checkin"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #checkin></mat-datepicker>
+  </mat-form-field>
+  <!-- CHECKOUT DATE -->
+  <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Checkout Date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="checkout"
+      [formControlName]="'checkoutDate'"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle
+      matIconSuffix
+      [for]="checkout"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #checkout></mat-datepicker>
+  </mat-form-field>
+  <!-- GUEST NAME -->
+  <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Name</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControlName]="'guestName'"
+      placeholder="Your First and Last Name"
+    />
+    <mat-error *ngIf="bookingForm.get('guestName')?.errors">{{getErrorMessage(this.bookingForm.get('guestName'))}}</mat-error>
+  </mat-form-field>
+  <!-- MOBILE NUMBER -->
+  <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Phone Number</mat-label>
+    <input
+      type="tel"
+      matInput
+      [formControlName]="'mobileNumber'"
+      placeholder="123-456-7890"
+      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+    />
+  </mat-form-field>
+  <!-- EMAIL -->
+  <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Email</mat-label>
+    <input
+    type="email"
+    matInput
+      [formControlName]="'guestEmail'"
+      placeholder="name@mail.com"
+    />
+  </mat-form-field>
+
+  <!-- EXPANSION PANEL FOR ADDRESS -->
+  <!-- in the <div> formGroupName finds the nested form names inside "address" -->
+  <!-- the address form is nested inside the bookingForm -->
+  <div formGroupName="address">
+    <mat-accordion class="example-headers-align container-fluid">
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Address </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- ADDRESS Line 1 -->
+        <mat-form-field class="example-full-width container-fluid">
+          <mat-label>Address Line 1</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControlName]="'guestAddressLine1'"
+            placeholder="Address Line 1"
+          />
+          <mat-error *ngIf="bookingForm.get('address.guestAddressLine1')?.hasError('required')">
+            Address Line 1 is <strong>required.</strong>
+          </mat-error>
+        </mat-form-field>
+        <!-- ADDRESS LINE 2 -->
+        <mat-form-field class="example-full-width container-fluid">
+          <mat-label>Address Line 2</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControlName]="'guestAddressLine2'"
+            placeholder="Address Line 2"
+          />
+        </mat-form-field>
+        <!-- CITY -->
+        <mat-form-field class="example-full-width container-fluid">
+          <mat-label>City</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControlName]="'guestCity'"
+            placeholder="City"
+          />
+          <mat-error *ngIf="bookingForm.get('address.guestCity')?.hasError('required')">
+            City is <strong>required.</strong>
+          </mat-error>
+        </mat-form-field>
+        <!-- STATES -->
+        <mat-form-field class="example-full-width container-fluid">
+          <mat-label>State</mat-label>
+          <mat-select [formControlName]="'guestState'">
+            <mat-option value="AL">Alabama</mat-option>
+            <mat-option value="AK">Alaska</mat-option>
+            <mat-option value="AZ">Arizona</mat-option>
+            <mat-option value="AR">Arkansas</mat-option>
+            <mat-option value="CA">California</mat-option>
+            <mat-option value="CO">Colorado</mat-option>
+            <mat-option value="CT">Connecticut</mat-option>
+            <mat-option value="DE">Delaware</mat-option>
+            <mat-option value="DC">District Of Columbia</mat-option>
+            <mat-option value="FL">Florida</mat-option>
+            <mat-option value="GA">Georgia</mat-option>
+            <mat-option value="HI">Hawaii</mat-option>
+            <mat-option value="ID">Idaho</mat-option>
+            <mat-option value="IL">Illinois</mat-option>
+            <mat-option value="IN">Indiana</mat-option>
+            <mat-option value="IA">Iowa</mat-option>
+            <mat-option value="KS">Kansas</mat-option>
+            <mat-option value="KY">Kentucky</mat-option>
+            <mat-option value="LA">Louisiana</mat-option>
+            <mat-option value="ME">Maine</mat-option>
+            <mat-option value="MD">Maryland</mat-option>
+            <mat-option value="MA">Massachusetts</mat-option>
+            <mat-option value="MI">Michigan</mat-option>
+            <mat-option value="MN">Minnesota</mat-option>
+            <mat-option value="MS">Mississippi</mat-option>
+            <mat-option value="MO">Missouri</mat-option>
+            <mat-option value="MT">Montana</mat-option>
+            <mat-option value="NE">Nebraska</mat-option>
+            <mat-option value="NV">Nevada</mat-option>
+            <mat-option value="NH">New Hampshire</mat-option>
+            <mat-option value="NJ">New Jersey</mat-option>
+            <mat-option value="NM">New Mexico</mat-option>
+            <mat-option value="NY">New York</mat-option>
+            <mat-option value="NC">North Carolina</mat-option>
+            <mat-option value="ND">North Dakota</mat-option>
+            <mat-option value="OH">Ohio</mat-option>
+            <mat-option value="OK">Oklahoma</mat-option>
+            <mat-option value="OR">Oregon</mat-option>
+            <mat-option value="PA">Pennsylvania</mat-option>
+            <mat-option value="RI">Rhode Island</mat-option>
+            <mat-option value="SC">South Carolina</mat-option>
+            <mat-option value="SD">South Dakota</mat-option>
+            <mat-option value="TN">Tennessee</mat-option>
+            <mat-option value="TX">Texas</mat-option>
+            <mat-option value="UT">Utah</mat-option>
+            <mat-option value="VT">Vermont</mat-option>
+            <mat-option value="VA">Virginia</mat-option>
+            <mat-option value="WA">Washington</mat-option>
+            <mat-option value="WV">West Virginia</mat-option>
+            <mat-option value="WI">Wisconsin</mat-option>
+            <mat-option value="WY">Wyoming</mat-option>
+          </mat-select>
+          <mat-error *ngIf="bookingForm.get('address.guestState')?.hasError('required')">
+            State is <strong>required.</strong>
+          </mat-error>
+        </mat-form-field>
+        <!-- COUNTRY -->
+        <mat-form-field class="example-full-width container-fluid">
+          <mat-label>Country</mat-label>
+          <mat-select [formControlName]="'guestCountry'">
+            <mat-option value="">--</mat-option>
+            <mat-option value="USA">United States of America</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!--  ZIP CODE -->
+        <mat-form-field class="example-full-width container-fluid">
+          <mat-label>ZIP Ccode</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControlName]="'guestZipCode'"
+            placeholder="ZIP Code"
+            minlength="5"
+            maxLength="5"
+            pattern="[0-9]{5}"
+          />
+        </mat-form-field>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <!-- below was an old implementation for the named inputs -->
+  <!-- NUMBER OF GUESTS -->
+  <!-- <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Number of Guests</mat-label>
+    <input
+      type="number"
+      matInput
+      [formControlName]="'guestCount'"
+      placeholder="Guest Count"
+    />
+  </mat-form-field> -->
+  <!-- GUEST NAMES LIST -->
+  <!-- <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Guest Names</mat-label>
+    <input type="text" matInput [formControlName]="'guestList'" placeholder="First and Last Names separated by commas">
+  </mat-form-field> -->
+
+  <!-- by clicking this button -->
+  <!-- it adds another object to the guests[] property of bookingForm -->
+  <div>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="addGuest()"
+    >
+      Add Guest
+    </button>
+  </div>
+
+  <!-- formArrayName needs the value of the formArray  -->
+  <div formArrayName="guests">
+    <!-- the loop here loops over the number objects in the guests[] -->
+    <div *ngFor="let guest of guests.controls; let i = index">
+      <!-- i represents the index inside the guests[] -->
+      <div [formGroupName]="i">
+        <mat-form-field class="example-full-width container-fluid">
+          <mat-label>Guest Name {{ i + 1 }}</mat-label>
+          <input type="text" matInput [formControlName]="'guestName'" />
+          <mat-error *ngIf="bookingForm.get('guests.'+i+'.guestName')?.errors">{{getErrorMessage(this.bookingForm.get('guests.'+i+'.guestName'))}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width container-fluid">
+          <mat-label>Guest Age {{ i + 1 }}</mat-label>
+          <input type="number" matInput [formControlName]="'age'" />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="removeGuest(i)"
+        >
+          Remove Guest
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING AMOUNT -->
+  <mat-form-field class="example-full-width container-fluid">
+    <mat-label>Booking Amount</mat-label>
+    <input type="number" matInput [formControlName]="'bookingAmount'" />
+  </mat-form-field>
+  <!-- TERMS AND CONDITIONS CHECKBOX -->
+  <div>
+    <label for="termsAndConditions">Do you Agree to the Terms and Conditions?</label>
+    <section>
+    <mat-checkbox id="termsAndConditions" [formControlName]="'termsAndConditions'">Yes</mat-checkbox>
+</section>
+</div>
+  <div>
+    <button [disabled]="bookingForm.invalid" mat-raised-button color="primary">Submit Booking</button>
+  </div>
+</form>
