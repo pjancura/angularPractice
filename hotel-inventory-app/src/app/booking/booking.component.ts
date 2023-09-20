@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
+import { BookingService } from './booking.service';
+import { exhaustMap, mergeMap, switchMap, interval } from 'rxjs';
 
 
 
@@ -17,7 +19,7 @@ export class BookingComponent {
     return this.bookingForm.get('guests') as FormArray;
   }
 
-  constructor (private configService: ConfigService, private fb: FormBuilder) {
+  constructor (private configService: ConfigService, private fb: FormBuilder, private bookingService: BookingService) {
     
   }
 
@@ -51,12 +53,30 @@ export class BookingComponent {
       // guestList: ['']
       termsAndConditions: new FormControl(false, [Validators.requiredTrue]),
       // this is an example of modifying the valueChanges stream for the entire form
-    }, {updateOn: 'blur'});
+    }, {updateOn: 'change'});
 
     this.getBookingData();
 
-    this.bookingForm.valueChanges.subscribe((data) =>
-    console.log(data));
+    // this.bookingForm.valueChanges.subscribe((data) =>
+    // this.bookingService.bookRoom(data));
+
+    // this.bookingForm.valueChanges.pipe(
+    //   // mergeMap will try to pass the stream as soon as it is emitted 
+    //   mergeMap((data) => this.bookingService.bookRoom(data))
+    // ).subscribe((data) => console.log(data));
+
+    // this.bookingForm.valueChanges.pipe(
+    //   // switchMap will cancel any request if it receives new data from the same stream
+    //   switchMap((data) => this.bookingService.bookRoom(data))
+    // ).subscribe((data) => console.log(data));
+
+    this.bookingForm.valueChanges.pipe(
+      // exhaustMap will try to wait for breaks in the data stream before it posts the changes
+      // i do not fully understand how to make this operator work
+      // it keeps getting hung up after an initial input on the form
+      // it doesn't do the chunking that it is supposed to
+      exhaustMap((data) => this.bookingService.bookRoom(data))
+    ).subscribe((data) => console.log(data));
   }
 
 
@@ -64,6 +84,10 @@ export class BookingComponent {
     // this will console.log the values of the form in JSON format
     // .getRawValue will pull the value from a FormControl even if it is disabled
     console.log(this.bookingForm.getRawValue());
+
+    // this.bookingService.bookRoom(this.bookingForm.getRawValue()).subscribe((data) => {
+    //   console.log(data);
+    // })
 
     this.bookingForm.reset({
       roomId: '2',
@@ -86,8 +110,6 @@ export class BookingComponent {
       guests: [],
       termsAndConditions: false,
     });
-
-
   }
 
 
@@ -130,7 +152,7 @@ export class BookingComponent {
   addGuestControl() {
     return this.fb.group({ 
       // below with "updateOn:" shows how to modify the frequency with which changes are passed through the data stream
-      guestName: new FormControl('',{ updateOn: 'blur', validators: [Validators.required, Validators.minLength(5)]}),
+      guestName: new FormControl('',{ updateOn: 'change', validators: [Validators.required, Validators.minLength(5)]}),
       age: new FormControl('')
     });
   }
