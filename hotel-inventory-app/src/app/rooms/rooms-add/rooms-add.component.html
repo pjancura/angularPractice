@@ -20,6 +20,7 @@
     </label>
           <!-- [(ngModel)] is an example of 2-way data binding -->
           <!-- meaning that a change in the input will be reflected back in the .ts file (rooms-add.component.ts file in this case) -->
+          <!-- [ngModelOptions] is how you can modify the data stream for valueChanges on a template driven form -->
           <input
           class="form-control"
           type="text"
@@ -29,6 +30,7 @@
           minlength="5"
           maxlength="255"
           required
+          [ngModelOptions]="{ updateOn: 'blur'}"
           />
   </div>
   <div class="form-group">

@@ -50,7 +50,13 @@ export class BookingComponent {
       // guestCount: [''],
       // guestList: ['']
       termsAndConditions: new FormControl(false, [Validators.requiredTrue]),
-    });
+      // this is an example of modifying the valueChanges stream for the entire form
+    }, {updateOn: 'blur'});
+
+    this.getBookingData();
+
+    this.bookingForm.valueChanges.subscribe((data) =>
+    console.log(data));
   }
 
 
@@ -80,6 +86,38 @@ export class BookingComponent {
       guests: [],
       termsAndConditions: false,
     });
+
+
+  }
+
+
+  // setValue() requires all of the properties to be defined
+  // patchValue() only requires the properites you want to modify
+  getBookingData() {
+    this.bookingForm.setValue({
+      roomId: '2',
+      guestEmail: 'test@mail.com',
+      checkinDate: new Date('2023-10-24'),
+      checkoutDate: '',
+      bookingStatus: '',
+      bookingAmount: '',
+      bookingDate: '',
+      mobileNumber: '',
+      guestName: '',      
+      address: {
+        guestAddressLine1: '',
+        guestAddressLine2: '',
+        guestCity: '',
+        guestState: '',
+        guestCountry: '',
+        guestZipCode: '',
+      },
+      guests: [{
+        guestName: '',
+        age: ''
+    }],
+      termsAndConditions: false,
+    } );
   }
 
   // this adds another guest  to the guests[] property of the bookingForm
@@ -91,7 +129,8 @@ export class BookingComponent {
 
   addGuestControl() {
     return this.fb.group({ 
-      guestName: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      // below with "updateOn:" shows how to modify the frequency with which changes are passed through the data stream
+      guestName: new FormControl('',{ updateOn: 'blur', validators: [Validators.required, Validators.minLength(5)]}),
       age: new FormControl('')
     });
   }
