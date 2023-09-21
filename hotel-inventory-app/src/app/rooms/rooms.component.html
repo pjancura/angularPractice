@@ -1,17 +1,17 @@
 <!-- line 2  is an example of interpolation from the rooms.component class -->
 <!-- <h1>Welcome to {{hotelName}}</h1> -->
 
-<hotelInv-header></hotelInv-header>
-<hotelInv-header></hotelInv-header>
+<!-- <hotelInv-header></hotelInv-header> -->
+<!-- <hotelInv-header></hotelInv-header> -->
 <!-- <hotelInv-header></hotelInv-header>
     <hotelInv-header></hotelInv-header>
     <hotelInv-header></hotelInv-header>
     <hotelInv-header></hotelInv-header>
     <hotelInv-header></hotelInv-header> -->
     
-    <h3>{{totalBytes}}bytes loaded</h3>
+    <!-- <h3>{{totalBytes}}bytes loaded</h3>
     <h3>{{ getError$ | async }}</h3>
-    <h3>Number of rooms: {{ roomsCount$ | async }}</h3>
+    <h3>Number of rooms: {{ roomsCount$ | async }}</h3> -->
     
 
 
@@ -36,14 +36,14 @@
     <!-- uses banana syntax -->
     <!-- toggle() is the function, it is written in the component class section -->
     <!-- in this case toggle() changes the value of "hidden" for the value of the roomDiv -->
-    <button (click)="toggle()">Toggle</button>
+    <!-- <button (click)="toggle()">Toggle</button> -->
 
     <!-- this receives data from the child component - rooms-list.component - and displays the selected room in a json format -->
     <div *ngIf="selectedRoom">
-        {{ selectedRoom | json }}
+        <!-- {{ selectedRoom | json }} -->
     </div>
 
-    <!-- this router-outlet is for the child path for RoomsBookingComponent -->
+    <!-- this router-outlet is for the child path for RoomsBookingComponent and for RoomsAddComponent -->
     <router-outlet></router-outlet>
 
 
@@ -51,7 +51,7 @@
         <!-- <button (click)="addRoom()">Add Room</button> -->
 
         <!-- this button will display the add room form -->
-        <button routerLink="add">Add Room</button>
+        <button class="btn btn-success" routerLink="add">Add Room</button>
     </div>
 
 <!-- Optional Chaining -->

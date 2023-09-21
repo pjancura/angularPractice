@@ -3,6 +3,7 @@ import { ConfigService } from '../services/config.service';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { BookingService } from './booking.service';
 import { exhaustMap, mergeMap, switchMap, interval } from 'rxjs';
+import { CustomValidator } from './validators/custom-validator';
 
 
 
@@ -36,7 +37,7 @@ export class BookingComponent {
       bookingAmount: [''],
       bookingDate: [''],
       mobileNumber: [''],
-      guestName: ['',[Validators.required, Validators.minLength(5)]],
+      guestName: ['',[Validators.required, Validators.minLength(5), CustomValidator.ValidateName, CustomValidator.ValidateSpecialChar('*')]],
       // address is a nested form 
       // look at the .html to see how to access these values
       address: this.fb.group({
@@ -53,7 +54,7 @@ export class BookingComponent {
       // guestList: ['']
       termsAndConditions: new FormControl(false, [Validators.requiredTrue]),
       // this is an example of modifying the valueChanges stream for the entire form
-    }, {updateOn: 'change'});
+    }, {updateOn: 'change', validators: [CustomValidator.validateDate]});
 
     this.getBookingData();
 

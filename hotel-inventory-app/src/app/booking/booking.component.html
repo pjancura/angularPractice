@@ -1,15 +1,20 @@
 <h2>Booking Form</h2>
 
-<div>
+<!-- <div>
   <p>{{ bookingForm.value | json }}</p>
   <p>bookingForm.pristine: {{ bookingForm.pristine | json }}</p>
   <p>bookingForm.dirty: {{ bookingForm.dirty | json }}</p>
-</div>
+</div> -->
 
-<button mat-raised-button color="primary" type="button" (click)="addPassport()">
+<p>invalid: {{ bookingForm.invalid | json}}</p>
+<p>valid: {{ bookingForm.valid | json}}</p>
+<br>
+
+<button class="passportBtn" mat-raised-button color="primary" type="button" (click)="addPassport()">
   Add Passport
 </button>
 <button
+  class="passportBtn"
   mat-raised-button
   color="primary"
   type="button"
@@ -100,6 +105,8 @@
       [for]="checkout"
     ></mat-datepicker-toggle>
     <mat-datepicker #checkout></mat-datepicker>
+    <mat-error *ngIf="bookingForm.get('checkoutDate')?.hasError('invalidDate')">
+      Checkout Date must be <strong>after</strong> Checkin Date </mat-error>
   </mat-form-field>
   <!-- GUEST NAME -->
   <mat-form-field class="example-full-width container-fluid">

@@ -20,6 +20,10 @@ export class LoginService {
       this.isLoggedIn = true;
       this.isAdmin = false;
     }
+    else {
+      this.isLoggedIn = false;
+      this.isAdmin = false;
+    }
     return this.isLoggedIn;
   }
 }

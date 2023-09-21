@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivateChild: [roomsGuard],
   // with canMatch the application will only load in the files if the user is logged in
   // this is useful with lazy loaded modules 
-    canMatch: [doNotLoadRoomsGuard],
+  canMatch: [doNotLoadRoomsGuard],
   children:  [
     { path: 'add', component: RoomsAddComponent },
     { path: ':id', component: RoomsBookingComponent },

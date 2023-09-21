@@ -176,8 +176,8 @@ export class RoomsComponent {
     this.headerComponent.title = 'Rooms View';
     // the following 2 lines dynamically changes the title of the last header component
     // the @ViewChildren allows me access to this property
-    console.log(this.headerChildrenComponent);
-    this.headerChildrenComponent.last.title = "Last Header";
+    // console.log(this.headerChildrenComponent);
+    // this.headerChildrenComponent.last.title = "Last Header";
     // there is also a get(index#) method for the @ViewChildren decorator
     // example: this.headChildrenComponent.get(index#).property = ??
   }
