@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // line 4 is the import for HttpClientModule this allows you to communicate with your API's 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailValidatorDirective } from './email-validator/email-validator.directive';
 import { RouteConfigToken } from './services/routeConfig.service';
+import { GlobalErrorHandler } from './error-handler.service';
 
 
 
@@ -85,6 +86,9 @@ function initFactory(initService: InitService) {
   },{
     provide: RouteConfigToken,
     useValue: { title: 'Home'},
+  },{
+    provide: ErrorHandler, useClass: GlobalErrorHandler,
+    
   }],
   // 
   bootstrap: [AppComponent]

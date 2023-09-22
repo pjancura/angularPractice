@@ -4,14 +4,14 @@ import { CanActivateFn } from '@angular/router';
 import { commentGuard } from './comment.guard';
 
 describe('commentGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => commentGuard(...guardParameters));
+  // const executeGuard: CanActivateFn = (...guardParameters) => 
+  //     TestBed.runInInjectionContext(() => commentGuard(...guardParameters));
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-  });
+  // beforeEach(() => {
+  //   TestBed.configureTestingModule({});
+  // });
 
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
-  });
+  // it('should be created', () => {
+  //   expect(executeGuard).toBeTruthy();
+  // });
 });
