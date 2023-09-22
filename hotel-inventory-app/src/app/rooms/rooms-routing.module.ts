@@ -12,13 +12,13 @@ const routes: Routes = [
   // as opposed to loading a separate view for the path
   { path: '', component: RoomsComponent, 
   // with canActivateChild only an "admin" type user can view the child paths
-    canActivateChild: [roomsGuard],
+   // canActivateChild: [roomsGuard],
   // with canMatch the application will only load in the files if the user is logged in
   // this is useful with lazy loaded modules 
-  canMatch: [doNotLoadRoomsGuard],
+  // canMatch: [doNotLoadRoomsGuard],
   children:  [
     { path: 'add', component: RoomsAddComponent },
-    { path: ':id', component: RoomsBookingComponent },
+    // { path: ':id', component: RoomsBookingComponent },
   ]}, 
   // example of dynamic path
   // this was moved to be a child path of 'rooms'

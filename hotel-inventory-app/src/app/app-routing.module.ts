@@ -22,15 +22,15 @@ const routes: Routes = [
     path: 'rooms',
     loadChildren: () =>
       import('./rooms/rooms.module').then((m) => m.RoomsModule),
-    canActivate: [loginGuard],
-    canMatch: [doNotLoadRoomsGuard],
+    // canActivate: [loginGuard],
+    // canMatch: [doNotLoadRoomsGuard],
   },
   { path: 'login', component: LoginComponent },
   {
-    path: 'booking',
+    path: 'booking/:roomId',
     loadChildren: () =>
       import('./booking/booking.module').then((m) => m.BookingModule),
-    canActivate: [loginGuard],
+    // canActivate: [loginGuard],
   },
   // the following path is called a WildCard route, this is for redirecting after a mistyped route
   { path: '**', component: NotfoundComponent },

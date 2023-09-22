@@ -5,7 +5,7 @@
         <input #emailControl="ngModel" hotelInvEmailValidator hotelInvHover="lightgreen" class="form-control" type="email" name="name" id="email" [(ngModel)]="email" placeholder="Provide your user Email">
     </div>
     <div>
-        {{emailControl.errors | json}}
+       looking for "test" to be present in the email input:  {{emailControl.errors | json}}
     </div>
     <div class="form-group">
         <!-- with @Input() being added, the value of "hotelInvHover" can be changed

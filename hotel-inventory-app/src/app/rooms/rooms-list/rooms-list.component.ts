@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import { RoomList } from '../rooms';
+import { FilterPipe } from '../filter.pipe';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { RoomList } from '../rooms';
   styleUrls: ['./rooms-list.component.scss'],
   // this will detect changes to objects and events that will affect the display of our DOM
   // this helps to only update what has been changed and not affect what has already been rendered (if i understand correctly)
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoomsListComponent {
   // the below line gets the data from the onInit function in the parent component
@@ -17,6 +18,8 @@ export class RoomsListComponent {
   
   @Input() title: string = '';
 
+  @Input() price : number | null = 0;
+  
   @Output() selectedRoom = new EventEmitter<RoomList>();
   
   constructor () {

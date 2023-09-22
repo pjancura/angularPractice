@@ -54,6 +54,11 @@
         <button class="btn btn-success" routerLink="add">Add Room</button>
     </div>
 
+    <div>
+        {{priceFilter | json}}
+        <input type="number" class="form-control" placeholder="Price" [formControl]="priceFilter">
+    </div>
+
 <!-- Optional Chaining -->
 <!-- the ? serves to check if availableRooms exists for the object at all -->
 <!-- {{ rooms?.availableRooms ?? 'No rooms'}} -->
@@ -73,7 +78,7 @@
 <!-- the following code is to demonstrate the use of ngOnDestroy -->
 <div *ngIf="hideRooms">
     <div *ngIf="rooms$ | async as rooms; else elseBlock">
-    <hotelInv-rooms-list [rooms]="rooms" [title]="title" (selectedRoom)="selectRoom($event)"></hotelInv-rooms-list>
+    <hotelInv-rooms-list [rooms]="rooms" [title]="title" [price]="priceFilter.value" (selectedRoom)="selectRoom($event)"></hotelInv-rooms-list>
 </div>
 
 <ng-template #elseBlock>

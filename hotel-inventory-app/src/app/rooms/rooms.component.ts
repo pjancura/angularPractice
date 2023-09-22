@@ -7,6 +7,8 @@ import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
 import { ConfigService } from '../services/config.service';
+import { FormControl } from '@angular/forms';
+import { FilterPipe } from './filter.pipe';
 
 
 @Component({
@@ -72,6 +74,8 @@ export class RoomsComponent {
       this.error$.next(err.message);
       return of([]);
     }));
+
+  priceFilter = new FormControl(0)
   
   // private means that the service will not leak onto my template (the html)
   // the constructor should not have any blocking code (i assume this means code that would stop the component from rendering entirely)

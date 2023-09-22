@@ -14,7 +14,7 @@
         </tr>
 <!-- *ngFor creates a for loop for displaying repetitive data -->
 <!-- works like a forEach loop -->
-        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms; let e=even; let o=odd; let i = index">
+        <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms | filter : price; let e=even; let o=odd; let i = index">
             <td style="display: none">{{ e ? "Even" : "Odd" }}</td>
             <td>{{ i + 1 }}</td>
             <td>{{ room.roomNumber }}</td>
@@ -34,7 +34,7 @@
                 <!-- <button class="btn btn-outline-primary" (click)="selectRoom(room)">Select</button> -->
 
                 <!-- [routerLink] appends whatever is in the []. unless you use '/', then it means start with whatever follows the "/" -->
-                <button class="btn btn-outline-primary" [routerLink]="['/rooms', room.roomNumber]">Book Room</button>
+                <button class="btn btn-outline-primary" [routerLink]="['/booking', room.roomNumber]">Book Room</button>
             </td>
         </tr>
     </table>
