@@ -32,6 +32,7 @@ const routes: Routes = [
       import('./booking/booking.module').then((m) => m.BookingModule),
     // canActivate: [loginGuard],
   },
+  { path: 'comments', loadChildren: () => import('./comment/comment.module').then(m => m.CommentModule) },
   // the following path is called a WildCard route, this is for redirecting after a mistyped route
   { path: '**', component: NotfoundComponent },
 ];
