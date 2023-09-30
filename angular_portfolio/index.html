@@ -1,0 +1,249 @@
+<!-- doctype tells a browser how to render a website -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <!-- lang is an attribute for language, en = english,
+dir...is for the direction of the reader,
+ltr...left to right...rtl...right to left -->
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/style.css" />
+    <title>Paul's Personal Site</title>
+  </head>
+
+  <body>
+    <div class="introDiv">
+      <img
+        class="headerPic matchWH"
+        src="public/header_pic_1.jpeg"
+        alt="header_pic.jpeg"
+      />
+      <div class="mask1">
+        <div class="headerTextDiv">
+          <h2 class="headerText headerLine1">Hello! I'm</h2>
+          <h1 class="headerText headerLine2">Paul Jancura</h1>
+          <h5 class="headerText headerLine3">
+            A highly motivated and detail oriented software developer.
+          </h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="aboutMeDiv">
+      <div class="aboutMeCard1">
+        <h2 class="aboutMeTitle">About Me</h2>
+        <p class="introStory">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I first took the initiative to start
+          learning to code through a Udemy course a year ago. It has been fun
+          building the various projects, as they solidify what I am learning
+          from the curriculum. Also, even though my degree isn’t in Computer
+          Science or Business, I have proven that I can adapt to new fields and
+          be successful. Through the Cleveland Codes Software Developers Academy
+          at Cuyahoga Community College, I have further enhanced my skills with
+          Python, MySQL, Javascript, HTML and CSS.
+        </p>
+        <button class="downloadBtn">
+          <a
+            class="downloadAnchor"
+            href="public/jancura_resume_2023.pdf"
+            download
+            ><img
+              class="downloadIcon"
+              src="public/download_icon.svg"
+              alt="download"
+            /><span class="downloadText">Resume</span></a
+          >
+        </button>
+      </div>
+      <img
+        id="profilePic"
+        src="public/new_headshot.jpg"
+        alt="Profile Picture"
+      />
+    </div>
+
+    <div class="summaryOfWork">
+      <details>
+        <summary class="summaryTitle">Education</summary>
+        <div class="detailDiv">
+          <h3>Cuyahoga Community College</h3>
+          <ul>
+            <li>March 2023 - June 2023</li>
+            <li>Cleveland Codes Software Developers Academy</li>
+            <li>
+              PearsonVUE Certificates in HTML/CSS, Javascript, MySQL
+              (Databases), and Python
+            </li>
+          </ul>
+          <h3>The Ohio State University</h3>
+          <ul>
+            <li>2008 - 2012</li>
+            <li>Bachelor's of Music Eduation, Magna Cum Laude</li>
+          </ul>
+        </div>
+      </details>
+      <br />
+      <details>
+        <summary class="summaryTitle">Technical Skills</summary>
+        <div class="detailDiv">
+          <table class="detailTable">
+            <tbody>
+              <tr>
+                <th>Programming Languages</th>
+                <th>Web Development</th>
+                <th>Tools</th>
+              </tr>
+              <tr>
+                <td>Python</td>
+                <td>MVC Frameworks</td>
+                <td>VS Code</td>
+              </tr>
+              <tr>
+                <td>MySQL</td>
+                <td>HTML</td>
+                <td>Hyper Terminal</td>
+              </tr>
+              <tr>
+                <td>Javascript</td>
+                <td>CSS</td>
+                <td>Inkscape</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Web2Py</td>
+                <td>MySQL Workbench</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <br />
+      <details>
+        <summary class="summaryTitle">Project Experience</summary>
+        <div class="detailDiv">
+          <h3>Cuyahoga Community College</h3>
+          <p>Spring 2023</p>
+          <p>Software Development Projects</p>
+          <ul>
+            <li>
+              Assisted in the development of a Python based customer relations
+              manager web application so that employees could effectively track
+              communication with their customers and vendors
+            </li>
+            <li>
+              Using MySQL, built a database that stores information about Grieg
+              Lyric Pieces for piano. It includes the ability to query
+              information about a given piece and recordings that includes the
+              performance of that piece
+            </li>
+            <li>
+              Built a Simon game clone using Javascript, HTML, CSS, and
+              Bootstrap
+            </li>
+            <li>
+              Wrote a Python application that can take a text file of an HTML
+              table and parse it into a CSV (comma separated values) file
+            </li>
+          </ul>
+        </div>
+      </details>
+      <br />
+      <details>
+        <summary class="summaryTitle">Professional Experience</summary>
+        <div class="detailDiv">
+          <h3>Store Manager</h3>
+          <p>Zelikovitz Leathers - Ottawa, ON, CAN</p>
+          <p>2020 - 2021</p>
+          <ul>
+            <li>
+              Used psuedo-code to query our software to create lists of items
+              for inventory counts
+            </li>
+            <li>
+              Instructed new sales associates how to use POSitive for Business
+              (point of sale software)
+            </li>
+            <li>
+              Created an spreadsheet to calculate packaging of snaps, saving
+              30min of work
+            </li>
+            <li>
+              Created signage to communicate to customers our COVID restrictions
+            </li>
+            <li>
+              Assisting 3 - 4 customers a day with designing their projects and
+              picking materials
+            </li>
+            <li>
+              Reorganized the zipper storage to save customers 2 - 3 minutes of
+              searching
+            </li>
+            <li>
+              Created a spreadsheet of tasks to effectively communicate to the
+              store owner how long projects were taking
+            </li>
+          </ul>
+
+          <h3>Associate</h3>
+          <p>Zelikovitz Leathers - Ottawa, ON, CAN</p>
+          <p>2020 January - May</p>
+          <ul>
+            <li>
+              Used psuedo-code to query our software to find price changes that
+              had not been done
+            </li>
+            <li>
+              Assisting 3 - 4 customers with designing their projects and
+              picking materials
+            </li>
+          </ul>
+
+          <h3>Elementary Music and Technology Teacher</h3>
+          <p>Imagine Groveport Community Schools - Groveport, OH, USA</p>
+          <p>2013 - 2019</p>
+          <ul>
+            <li>2014: Teacher of the Year</li>
+            <li>
+              Started a 3rd and 4th Grade after school Choir / Band with an
+              average attendance of 15 students
+            </li>
+            <li>
+              Created curriculum that aided students in becoming familiar with
+              the computers to take standardized tests
+            </li>
+            <li>
+              Started a 4th grade music program that allowed students to learn
+              to play the recorder
+            </li>
+            <li>Managed classrooms with an average class size of 25</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+    <footer class="footerDiv">
+      <div class="contactDiv">
+        <h3 class="footerHeading">Contact Me:</h3>
+        <!-- <p class="footerEmail">jancura.paul@gmail.com</p> -->
+        <div class="profileLinkDiv">
+          <a
+            class="footerLinkedIn"
+            href="https://www.linkedin.com/in/paul-jancura-4a6a12178"
+            ><img src="public/linkedin_logo.svg" alt="linkedin_logo.svg"
+          /></a>
+          <a href="https://github.com/pjancura"
+            ><img src="public/github_logo.svg" alt="github_logo.svg"
+          /></a>
+        </div>
+      </div>
+      <p class="copyRight">&copy;2023</p>
+    </footer>
+  </body>
+</html>
+
+

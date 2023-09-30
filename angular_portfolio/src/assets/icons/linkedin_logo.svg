@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="9.4409981mm"
+   height="9.440979mm"
+   viewBox="0 0 9.4409981 9.440979"
+   version="1.1"
+   id="svg5"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs2" /><g
+     id="layer1"
+     transform="translate(-38.229943,-333.39129)"><rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:0.742851;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       id="rect20511"
+       width="210.51816"
+       height="44.775307"
+       x="-0.24737738"
+       y="308.56534" /><path
+       style="fill:#204058;fill-opacity:1;stroke-width:0.0184669"
+       d="m 42.594184,342.81627 c -2.000453,-0.14335 -3.722576,-1.58663 -4.217749,-3.53482 -0.418564,-1.64678 0.07472,-3.39235 1.289003,-4.56131 1.052524,-1.01325 2.438522,-1.47128 3.903916,-1.29013 1.743524,0.21553 3.25534,1.44659 3.840484,3.12727 0.533355,1.53192 0.2376,3.24666 -0.777386,4.50717 -0.829152,1.02972 -2.033496,1.65822 -3.358591,1.7527 -0.28552,0.0204 -0.385116,0.0202 -0.679677,-8.8e-4 z m -1.121062,-4.11646 v -2.06805 H 40.88211 40.291098 v 2.06805 2.06805 h 0.591012 0.591012 z m 1.773175,0.88169 c 1.39e-4,-1.21476 0.0073,-1.36152 0.07288,-1.48864 0.0407,-0.0789 0.134506,-0.17115 0.215549,-0.21194 0.152731,-0.0769 0.459415,-0.0741 0.613883,0.006 0.07902,0.0407 0.171313,0.13449 0.212062,0.21543 0.05951,0.1182 0.06723,0.28784 0.06737,1.47964 l 1.4e-4,1.18636 h 0.592074 0.592074 l -0.0072,-1.38947 c -0.0076,-1.4582 -0.0093,-1.49058 -0.09628,-1.83358 -0.113304,-0.44655 -0.356307,-0.72703 -0.737538,-0.85129 -0.127426,-0.0415 -0.19098,-0.0499 -0.435472,-0.0571 -0.582169,-0.0173 -0.878013,0.0943 -1.024206,0.3865 l -0.06547,0.13084 v -0.26099 -0.26098 H 42.655152 42.06414 v 2.06805 2.06805 h 0.591012 0.591011 l 1.4e-4,-1.18636 z m -2.096385,-3.30505 c 0.109955,-0.0568 0.210704,-0.15834 0.27041,-0.27249 0.03677,-0.0703 0.04346,-0.11012 0.04342,-0.25851 -3.7e-5,-0.1544 -0.0059,-0.18647 -0.04914,-0.26774 -0.05885,-0.11064 -0.160673,-0.21113 -0.273927,-0.27034 -0.07028,-0.0367 -0.110189,-0.0435 -0.258567,-0.0435 -0.148379,0 -0.188283,0.007 -0.258568,0.0435 -0.113253,0.0592 -0.215078,0.1597 -0.273927,0.27034 -0.04322,0.0813 -0.04911,0.11334 -0.04914,0.26774 -3.7e-5,0.19876 0.03162,0.28346 0.154189,0.41241 0.125274,0.1318 0.251668,0.17953 0.455152,0.17187 0.115372,-0.004 0.167992,-0.016 0.240098,-0.0533 z"
+       id="path25495" /></g><!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</svg>

@@ -1,0 +1,48 @@
+.headerLine1 {
+  font-size: 8vw;
+  font-weight: 900;
+}
+
+/* .introDiv {
+  background-color: #ffab4cff; 
+   font-family: "Verdana", "Tahoma", "sans-serif";  
+   background-color: #2f4858ff;
+  } */
+/*  
+  .headerPic {
+    width: 100%;
+    position: relative;
+    display: block;
+    z-index: -1;
+  }
+  
+  .mask1 {
+    width: 100%;
+    aspect-ratio: 1.945;
+    position: absolute;
+    background-color: #673d035e;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+  
+  .headerTextDiv {
+    width: 50vw;
+    position: relative;
+    margin-top: 30%;
+    margin-left: 11%;
+    z-index: 10;
+    color: white;
+  }
+  
+  .headerTextGroup {
+    line-height: 0.90em;
+  }
+
+  h1.headerLine2 {
+    font-size: 6vw;
+    margin-left: -5px;
+  }
+  .headerLine3 {
+    font-size: 1.5vw;
+  } */

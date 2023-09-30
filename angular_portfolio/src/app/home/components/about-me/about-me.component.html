@@ -1,0 +1,40 @@
+<div class="container-fluid" id="aboutMeDiv">
+  <hr>
+  <div class="d-flex py-5 justify-content-around">
+    <div class="infoDiv py-4 px-4 rounded-4 border border-primary-subtle">
+      <h2 class="aboutMeTitle">Common Tools</h2>
+      <ul>
+        <li *ngFor="let skill of skills; index as i">
+          {{ skill.name }}
+        </li>
+      </ul>
+      <!-- <table id="skillDisplay">
+  
+      </table> -->
+    </div>
+
+    <div class="infoDiv py-4 px-4 rounded-4 border border-primary-subtle">
+      <div id="contactMe" class="">
+        <h2 class="">Contact Me:</h2>
+        <p>jancura.paul@gmail.com</p>
+        <div class="pb-3">
+        <a class="pe-3" [href]="linkedinHref.href"
+          ><img [src]="linkedinLogo.assetURL" [alt]="linkedinLogo.altText"
+        /></a>
+        <a [href]="githubHref.href"
+          ><img [src]="githubLogo.assetURL" [alt]="githubLogo.altText"
+        /></a>
+      </div>
+      </div>
+      <button class="btn btn-primary" id="resumeBtn">
+        <a class="downloadAnchor" [href]="resumePDF.assetURL" download
+        ><img
+        class="downloadIcon"
+        [src]="downloadIcon.assetURL"
+        [alt]="downloadIcon.altText"
+        /><span class="text-reset" id="downloadText">Resume</span></a
+        >
+      </button>
+    </div>
+  </div>
+</div>

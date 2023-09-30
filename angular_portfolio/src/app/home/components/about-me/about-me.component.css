@@ -1,0 +1,75 @@
+/* #aboutMeDiv {
+  background-color: #ffab4cff;
+  color: #204058;
+  background-color: #fff8f0ff;
+    position: relative;
+    padding: 7vw 6%;
+    display: flex;
+    justify-content: space-around;
+    z-index: 20;
+  } */
+  hr {
+    /* color: #9fdafaff; */
+    width: 25vw;
+    margin: 0 auto;
+    border-top: 0.2vw solid;
+}
+
+  /* .infoDiv {
+    background-color: #9fdafa;
+  } */
+ /* 
+  .aboutMeCard1 {
+    width: 45vw;
+  }
+  
+  .aboutMeTitle {
+    font-size: 3vw;
+    margin: 0;
+  }
+  .introStory {
+    font-size: 1.5vw;
+    text-align: justify;
+  }
+   */
+
+/*   
+  .downloadBtn {
+    width: 18vw;
+    margin-top: 2rem;
+    padding: 0.5vw 1vw;
+    background-color: #33658aff;
+    border: none;
+    border-radius: 50vh;
+    justify-content: center;
+  }
+  
+  .downloadBtn:hover {
+    background-color: rgb(32, 64, 88);
+  }
+
+  .downloadBtn:active{
+    background-color: rgb(70, 133, 182)
+  }
+  */
+  /* .resumeBtn {
+    background-color: #204058;
+    border-color: #204058;
+  } */
+  .downloadAnchor {
+    color: white;
+    text-decoration: none;
+  }
+
+  /* .downloadText {
+    display: inline;
+    font-size: 2.25vw;
+  } */
+
+  .downloadIcon {
+    width: 1.5vw;
+    aspect-ratio: 1.7;
+    margin-bottom: 5%;
+  }
+ 
+
